@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Wallet from "../pages/wallet.jsx";
-import Home from '../pages/home.jsx';
+import Home from "../pages/home.jsx";
 
 export const routes = createBrowserRouter([
   {
@@ -15,5 +15,5 @@ export const routes = createBrowserRouter([
     future: {
       v7_startTransition: true,
     },
-  }
+  },
 ]);
