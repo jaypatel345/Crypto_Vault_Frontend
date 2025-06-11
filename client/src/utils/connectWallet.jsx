@@ -1,22 +1,27 @@
-import {ethers} from "ethers";
+// utils/connectWallet.js
+import { ethers } from "ethers";
 import contractabi from "../contant/contractabi.json";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+
 export const connectWallet = async () => {
   try {
-    const account = await window.ethereum.request({
+    const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
-    const selectedAccount = account[0];
-    const provider = new ethers.BrowserProvider(window.ethereum);
 
+    const selectedAccount = accounts[0];
+    const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
 
     const contractAddress = "0xC4Ee7011A8389d1e35aE89F84a4c48756362f064";
-    const contractInstance = new ethers.Contract(contractAddress,contractabi,signer)
+    const contractInstance = new ethers.Contract(contractAddress, contractabi, signer);
 
-    console.log(selectedAccount,contractInstance);
+    console.log("Wallet connected:", selectedAccount, contractInstance);
+
+    return { contractInstance, selectedAccount }; // ✅ RETURN THIS
   } catch (error) {
-    toast.error("wallet connection fail");
+    toast.error("Wallet connection failed");
     console.error("Error connecting wallet:", error);
+    return null; // 🔁 Fallback so destructuring doesn't crash
   }
 };

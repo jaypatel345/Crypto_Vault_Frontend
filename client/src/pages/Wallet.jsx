@@ -7,6 +7,7 @@ const Wallet = () => {
   const navigateTo = useNavigate();
   const { updateWeb3State, web3State } = useweb3contexts();
   const { selectedAccount } = web3State;
+
   useEffect(() => {
     if (selectedAccount) {
       navigateTo("/home");
@@ -14,7 +15,19 @@ const Wallet = () => {
   }, [selectedAccount, navigateTo]);
 
   const handleWalletConnection = async () => {
-    const { contractInstance, selectedAccount } = await connectWallet();
+    const result = await connectWallet();
+
+    if (!result) {
+      console.error("connectWallet returned null");
+      return;
+    }
+
+    const { contractInstance, selectedAccount } = result;
+
+    console.log("Wallet connected:");
+    console.log("Selected Account:", selectedAccount);
+    console.log("Contract Instance:", contractInstance);
+
     updateWeb3State({ contractInstance, selectedAccount });
   };
 
