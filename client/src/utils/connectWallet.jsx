@@ -3,8 +3,9 @@ import contractabi from "../contant/contractabi.json";
 import toast from "react-hot-toast";
 import axios from "axios";
 
- const connectWallet = async () => {
+const connectWallet = async () => {
   try {
+    // Request access to the user's Ethereum account
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
@@ -13,16 +14,17 @@ import axios from "axios";
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
 
+    // Define and sign a custom message for authentication
     const message = "welcome to my application";
     const signature = await signer.signMessage(message);
 
-    // FIXED URL AND SPELLING
+    // Send signed message to backend for verification
     const url = `http://localhost:3000/api/authentication?address=${selectedAccount}`;
-
-    //  FIXED: send signature as JSON object
     const res = await axios.post(url, { signature });
-    console.log(res.data);
 
+    console.log("Authentication response:", res.data);
+
+    // Set up contract instance
     const contractAddress = "0xC4Ee7011A8389d1e35aE89F84a4c48756362f064";
     const contractInstance = new ethers.Contract(
       contractAddress,
@@ -30,13 +32,13 @@ import axios from "axios";
       signer
     );
 
-    console.log("Wallet connected:", selectedAccount, contractInstance);
-
+    console.log("Wallet connected:", selectedAccount);
     return { contractInstance, selectedAccount };
   } catch (error) {
-    toast.error("Wallet connection failed");
+    toast.error("Wallet connection failed: " + (error.message || "Unknown error"));
     console.error("Error connecting wallet:", error);
     return null;
   }
 };
+
 export default connectWallet;
