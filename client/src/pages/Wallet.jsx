@@ -1,5 +1,5 @@
 import { useweb3contexts } from "../contexts/useweb3contexts";
-import { connectWallet } from "../utils/connectWallet";
+import  connectWallet  from "../utils/connectWallet";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
