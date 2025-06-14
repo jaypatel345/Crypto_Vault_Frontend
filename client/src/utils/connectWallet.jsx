@@ -22,10 +22,12 @@ const connectWallet = async () => {
     const url = `http://localhost:3000/api/authentication?address=${selectedAccount}`;
     const res = await axios.post(url, { signature });
 
-    console.log("Authentication response:", res.data);
+    console.log("Authentication response:", res.data.token);
+    const token=res.data.token;
+    localStorage.setItem("token",token)
 
     // Set up contract instance
-    const contractAddress = "0xC4Ee7011A8389d1e35aE89F84a4c48756362f064";
+    const contractAddress = "0x289d8eA710C82A9EE1A8943487a719b17c0d3Dac";
     const contractInstance = new ethers.Contract(
       contractAddress,
       contractabi,
