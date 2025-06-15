@@ -64,7 +64,13 @@ const UploadImage = ({ reloadEffect }) => {
   return (
     <div className="upload-wrapper">
       <label className="upload-area">
-        <span className="upload-label">Upload file </span>
+        {loading ? (
+          <div className="loading-content">
+            <span className="spinner" /> Uploading...
+          </div>
+        ) : (
+          <span className="upload-label">Upload file</span>
+        )}
         <input
           type="file"
           accept=".jpg, .jpeg, .png"

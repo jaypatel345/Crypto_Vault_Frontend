@@ -8,7 +8,8 @@
 html,
 body {
   height: 100%;
-  overflow: hidden; /* Prevent page scroll */
+  overflow: hidden;
+  /* Prevent page scroll */
 }
 
 body {
@@ -120,8 +121,10 @@ body {
   color: rgb(137, 209, 247);
   border: none;
   border-radius: 150px;
-  padding: 15px 114px;        /* 🔽 reduced vertical + horizontal padding */
-  font-size: 0.4rem;        /* 🔽 slightly smaller text */
+  padding: 15px 114px;
+  /* 🔽 reduced vertical + horizontal padding */
+  font-size: 0.4rem;
+  /* 🔽 slightly smaller text */
   font-weight: 600;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
@@ -196,8 +199,13 @@ body {
 
 /* Animation */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive (Mobile) */
@@ -206,13 +214,57 @@ body {
     padding: 28px 20px;
     margin: 12px;
   }
+}
 
-  .upload-title {
-    font-size: 1.5rem;
-  }
+.upload-title {
+  font-size: 1.5rem;
+}
 
-  .security-features {
-    flex-direction: column;
-    gap: 16px;
-  }
+.security-features {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.uploaded-image {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.uploaded-image:hover {
+  transform: scale(1.03);
 }

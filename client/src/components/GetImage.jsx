@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import React from "react";
 import "../css/GetImage.css";
-import Pagination from "../components/Pagination.jsx"; // ✅ Consistent pagination
+import Pagination from "../components/Pagination.jsx";
 
 const GetImage = ({ reload }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [imagePerPage] = useState(2);
+  const [imagePerPage] = useState(4);
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const { web3State } = useWeb3Context();
@@ -40,7 +40,7 @@ const GetImage = ({ reload }) => {
 
         const res = await axios.post(url, { ipfsHashArray }, config);
         const imagesData = res.data.decryptedImageArr || [];
-                setImages(imagesData);
+        setImages(imagesData);
       } catch (error) {
         console.error("Error fetching images:", error);
         toast.error("Error fetching images");
@@ -71,7 +71,7 @@ const GetImage = ({ reload }) => {
     <>
       {!loading ? (
         images.length > 0 ? (
-          <div className="image-gallery">
+          <div className="image-row">
             {images.map((imgData, index) => (
               <img
                 key={index}
@@ -88,7 +88,6 @@ const GetImage = ({ reload }) => {
         <p className="loading-text">Loading...</p>
       )}
 
-      {/* ✅ Clean, single pagination component */}
       <Pagination
         page={currentPage}
         onPrev={handlePrev}
