@@ -1,38 +1,34 @@
-import {ethers} from "ethers"
-import contractAbi from "../constants/contractAbi.json"
-import toast from "react-hot-toast"
-import axios from "axios"
-export const connectWallet = async()=>{
- try {
-    
-     if(!window.ethereum){
-        throw new Error("Metamask is not installed")
-     }
-     const accounts =await window.ethereum.request({
-        method:"eth_requestAccounts"
-     })
-     const selectedAccount = accounts[0];
-    
-     const provider = new ethers.BrowserProvider(window.ethereum);
-     const signer = await provider.getSigner();
-     
-     const message = "Welcome to Crypto Vault Website";
-     const signature = await signer.signMessage(message)
-     
-     const dataSignature = {
-      signature
-     }
-     const url=`http://localhost:3000/api/authentication?address=${selectedAccount}`
-     const res = await axios.post(url,dataSignature)
-     const token = res.data.token
-     
-     localStorage.setItem("token",token)
+import { ethers } from "ethers";
+import contractAbi from "../constants/contractAbi.json";
 
-     const contractAddress = "0xFA3270CD9862358b3a28199A7066E69eCfDA358D"
-     const contractInstance = new ethers.Contract(contractAddress,contractAbi,signer);
-     return {contractInstance,selectedAccount}
- } catch (error) {
-    toast.error("Wallet connection failed")
-    console.error(error)
- }
-}
+// Keep toast only for install check
+import toast from "react-hot-toast";
+
+export const connectWallet = async () => {
+  try {
+    if (!window.ethereum) {
+      toast.error("Metamask is not installed");
+      throw new Error("Metamask is not installed");
+    }
+
+    // Always prompt for accounts
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts"
+    });
+
+    const selectedAccount = accounts[0];
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+
+    // Connect to smart contract only
+    const contractAddress = "0x3c8a5B9F383232C97753fd99422a4364c1559DA2";
+    const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+
+    // ✅ Do NOT sign or auth here
+    return { contractInstance, selectedAccount, provider, signer };
+
+  } catch (error) {
+    console.error("Wallet connection failed:", error);
+    throw error; // ✅ Let caller handle toast + error display
+  }
+};

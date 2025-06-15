@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { Web3Context } from "./createWeb3Context";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../constants/constants";
+import React from 'react';
 
 const Web3Provider = ({ children }) => {
   const [web3State, setWeb3State] = useState({

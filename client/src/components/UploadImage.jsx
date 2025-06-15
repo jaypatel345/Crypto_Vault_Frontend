@@ -2,13 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useWeb3Context } from "../contexts/useWeb3Context";
 import toast from "react-hot-toast";
-import { ImageUp } from "lucide-react";
-
-// Optional: Remove if you use contractInstance from context
-// import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constants"; 
+import React from "react";
+import "../css/Upload.css";
 
 const UploadImage = ({ reloadEffect }) => {
-  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const { web3State } = useWeb3Context();
   const { selectedAccount, contractInstance } = web3State;
@@ -19,10 +16,8 @@ const UploadImage = ({ reloadEffect }) => {
         toast.error("Wallet not connected");
         return;
       }
-
       const tx = await contractInstance.uploadFile(selectedAccount, ipfsHash);
       await tx.wait();
-      console.log("File uploaded to contract!");
       toast.success("IPFS Hash stored on-chain");
     } catch (err) {
       console.error("Upload error:", err);
@@ -30,10 +25,16 @@ const UploadImage = ({ reloadEffect }) => {
     }
   };
 
-  const handleImageUpload = async () => {
+  const handleImageUpload = async (file) => {
     try {
       if (!file) {
         toast.error("Please select a file first");
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("You must be authenticated to upload.");
         return;
       }
 
@@ -41,19 +42,17 @@ const UploadImage = ({ reloadEffect }) => {
       const formData = new FormData();
       formData.append("file", file);
       const url = `http://localhost:3000/api/uploadImage`;
-      const token = localStorage.getItem("token");
 
       const config = {
         headers: {
-          "x-access-token": token,
+          Authorization: `Bearer ${token}`,
         },
       };
 
       const res = await axios.post(url, formData, config);
       toast.success("Image uploaded to IPFS");
-      await uploadImageHash(res.data.ipfsHash); // Add IPFS hash to contract
-      setFile(null);
-      reloadEffect(); // Trigger refresh
+      await uploadImageHash(res.data.ipfsHash);
+      reloadEffect();
     } catch (error) {
       console.error("Upload error:", error);
       toast.error("Image Upload Failed");
@@ -63,33 +62,17 @@ const UploadImage = ({ reloadEffect }) => {
   };
 
   return (
-    <div className="h-full w-screen flex flex-col justify-center items-center gap-6">
-      <p className="font-semibold md:text-[24px]">
-        Upload file with Web3's Security
-      </p>
-      <div className="w-full flex justify-center items-center">
+    <div className="upload-wrapper">
+      <label className="upload-area">
+        <span className="upload-label">Upload file </span>
         <input
           type="file"
           accept=".jpg, .jpeg, .png"
-          onChange={(e) => setFile(e.target.files[0])}
-          className="w-[200px] md:w-[210px]"
-        />
-      </div>
-      {file ? (
-        <button
-          onClick={handleImageUpload}
+          onChange={(e) => handleImageUpload(e.target.files[0])}
+          className="file-input"
           disabled={loading}
-          className="border-sky-400 border-dotted p-2 border-2 rounded-md flex flex-col justify-center items-center hover:bg-sky-200"
-        >
-          <ImageUp />
-          {loading ? "Uploading..." : "Upload"}
-        </button>
-      ) : (
-        <p className="text-[20px] font-semibold text-red-500">
-          Choose a File To Upload
-        </p>
-      )}
-      <br />
+        />
+      </label>
     </div>
   );
 };

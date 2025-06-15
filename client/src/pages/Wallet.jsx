@@ -1,36 +1,63 @@
-import {useWeb3Context} from "../contexts/useWeb3Context"
+// ✅ Wallet.jsx
+import React, { useState } from 'react';
+import { useWeb3Context } from "../contexts/useWeb3Context";
 import { connectWallet } from "../utils/connectWallet";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import '../css/Wallet.css';
+
+const SIGN_MESSAGE = "Welcome to Crypto Vault Website";
+const API_URL = "http://localhost:3000/api";
+
 const Wallet = () => {
-    const navigateTo=useNavigate()
-    const {updateWeb3State,web3State} = useWeb3Context()
-    const {selectedAccount}=web3State;
-    useEffect(()=>{
-      if(selectedAccount){
-        navigateTo("/home")
+  const { updateWeb3State } = useWeb3Context();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleWalletConnection = async () => {
+    setError(""); // ✅ Always clear error first
+    try {
+      const { contractInstance, selectedAccount, signer } = await connectWallet();
+
+      // ✅ Only sign here once
+      const signature = await signer.signMessage(SIGN_MESSAGE);
+
+      const res = await axios.post(
+        `${API_URL}/authentication?address=${selectedAccount}`,
+        { signature }
+      );
+
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        updateWeb3State({ contractInstance, selectedAccount });
+        navigate('/home'); // ✅ Redirect after success
+      } else {
+        setError("Authentication failed.");
       }
-    },[selectedAccount,navigateTo])
-    
-    const handleWalletConnection = async()=>{
-        const {contractInstance,selectedAccount} = await connectWallet();
-        updateWeb3State({contractInstance,selectedAccount})
+    } catch (err) {
+      console.error(err);
+      setError("Wallet connection or authentication failed.");
     }
-    
-    return ( 
-    <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
-    <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)] flex flex-col justify-center items-center gap-20">
-      <h1 className="font-bold text-[42px] gradient-text md:text-[60px]">
-        Crypted Vault
-      </h1>
-      <button
-        className="relative px-12 py-4 text-white bg-sky-400 rounded-md hover:bg-sky-800 font-semibold"
-        onClick={handleWalletConnection}
-      >
-        Connect Wallet
-      </button>
+  };
+
+  return (
+    <div className="main-layout">
+      <div className="wallet-box">
+        <div className="wallet-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="6" y="12" width="36" height="24" rx="6" fill="#38bdf8" />
+            <rect x="12" y="18" width="24" height="12" rx="4" fill="#fff" />
+            <circle cx="36" cy="24" r="3" fill="#7c3aed" />
+          </svg>
+        </div>
+        <h1 className="wallet-title">Crypted Vault</h1>
+        <button className="connect-btn" onClick={handleWalletConnection}>
+          Connect Wallet
+        </button>
+        {error && <div className="wallet-error">{error}</div>}
+      </div>
     </div>
-  </div> );
-}
- 
+  );
+};
+
 export default Wallet;
