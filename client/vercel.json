@@ -3,10 +3,12 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/next"
+      "use": "@vercel/static-build"
     }
   ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://my-backend.onrender.com"
+    "VITE_API_URL": "https://your-backend.onrender.com/api"
   }
 }
