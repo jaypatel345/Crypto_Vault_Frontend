@@ -1,5 +1,5 @@
 import React from 'react';
-import Web3Provider from './contexts/Web3Provider.jsx';
+import Web3Provider from './contexts/web3Provider.jsx';
 import { RouterProvider } from 'react-router-dom';
 import  {routes}  from './routes/routes.jsx';
 // Optionally import your CSS:
