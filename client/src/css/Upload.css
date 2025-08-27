@@ -529,132 +529,107 @@ body {
   /* fix ends */
 }
 
-.original-upload-wrapper .upload-area::before,
-.original-upload-wrapper [class*="upload"] [class*="area"]::before,
-.original-upload-wrapper>div>div[style*="border"]::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(227, 227, 229, 0.1), transparent);
-  transform: rotate(45deg);
-  transition: all 0.6s ease;
-  opacity: 0;
+/* Fix for duplicate upload areas during file upload */
+
+/* Hide empty upload areas when uploading is in progress */
+.original-upload-wrapper:has([class*="uploading"]) .upload-area:empty,
+.original-upload-wrapper:has([class*="progress"]) .upload-area:empty,
+.original-upload-wrapper:has([class*="loading"]) .upload-area:empty {
+  display: none !important;
 }
 
-/* .original-upload-wrapper .upload-area:hover::before,
-.original-upload-wrapper [class*="upload"] [class*="area"]:hover::before,
-.original-upload-wrapper > div > div[style*="border"]:hover::before {
-  opacity: 1;
-  animation: shimmer 5s infinite;
-} */
-
-.original-upload-wrapper .upload-area:hover,
-.original-upload-wrapper [class*="upload"] [class*="area"]:hover,
-.original-upload-wrapper>div>div[style*="border"]:hover {
-  border-color: #764ba2 !important;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2) !important;
+/* Alternative approach - hide upload areas without content when there's an active upload */
+.original-upload-wrapper .upload-area:empty + .upload-area,
+.original-upload-wrapper [class*="upload"][class*="area"]:empty + [class*="upload"][class*="area"] {
+  display: block !important;
 }
 
-.original-upload-wrapper .upload-area.dragover,
-.original-upload-wrapper [class*="upload"] [class*="area"].dragover,
-.original-upload-wrapper>div>div[style*="border"].dragover {
-  border-color: #10b981 !important;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.1)) !important;
-  transform: scale(1.02) !important;
+.original-upload-wrapper .upload-area:empty:not(:only-child),
+.original-upload-wrapper [class*="upload"][class*="area"]:empty:not(:only-child) {
+  display: none !important;
 }
 
-/* Upload Icon Styling */
-.original-upload-wrapper [class*="icon"],
-.original-upload-wrapper>div>div[style*="flex"]>div:first-child {
-  width: 80px !important;
-  height: 80px !important;
-  margin: 0 auto 1.5rem !important;
-  background: linear-gradient(135deg, #667eea, #764ba2) !important;
-  border-radius: 50% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  color: white !important;
-  font-size: 2rem !important;
+/* Hide duplicate upload containers during upload process */
+.original-upload-wrapper > div:has([class*="uploading"]) ~ div:empty,
+.original-upload-wrapper > div:has([class*="progress"]) ~ div:empty {
+  display: none !important;
+}
+
+/* Ensure only the uploading state is visible */
+.original-upload-wrapper [class*="uploading"],
+.original-upload-wrapper [class*="progress"],
+.original-upload-wrapper [class*="loading"] {
+  display: block !important;
   position: relative !important;
-  z-index: 2 !important;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3) !important;
-  transition: all 0.3s ease !important;
+  z-index: 10 !important;
 }
 
-.original-upload-wrapper [class*="icon"]:hover,
-.original-upload-wrapper>div>div[style*="flex"]>div:first-child:hover {
-  transform: scale(1.1) !important;
-  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4) !important;
+/* Hide any other upload areas when upload is in progress */
+.original-upload-wrapper:has([class*="uploading"]) > div:not([class*="uploading"]):not([class*="progress"]):not([class*="loading"]) {
+  display: none !important;
 }
 
-/* Upload Text Styling */
-.original-upload-wrapper [class*="text"],
-.original-upload-wrapper p,
-.original-upload-wrapper span {
-  position: relative !important;
-  z-index: 2 !important;
-  color: #334155 !important;
-  font-weight: 600 !important;
+.original-upload-wrapper:has([class*="progress"]) > div:not([class*="uploading"]):not([class*="progress"]):not([class*="loading"]) {
+  display: none !important;
 }
 
-.original-upload-wrapper p:first-of-type {
-  font-size: 1.3rem !important;
-  margin-bottom: 0.5rem !important;
+/* Specific targeting for your upload component structure */
+.enhanced-upload-container .original-upload-wrapper > div:empty,
+.enhanced-upload-container .original-upload-wrapper > div:not(:has(input)):not(:has(button)):not(:has([class*="upload"])):not(:has([class*="progress"])):not(:has([class*="loading"])) {
+  display: none !important;
 }
 
-.original-upload-wrapper p:last-of-type {
-  color: #64748b !important;
-  font-weight: 400 !important;
-  margin-bottom: 1.5rem !important;
-}
-
-/* Upload Button Styling */
-.original-upload-wrapper button,
-.original-upload-wrapper input[type="button"],
-.original-upload-wrapper [role="button"] {
-  background: linear-gradient(135deg, #667eea, #764ba2) !important;
-  color: white !important;
-  border: none !important;
-  padding: 0.75rem 2rem !important;
-  border-radius: 50px !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  transition: all 0.3s ease !important;
-  font-size: 1rem !important;
-  position: relative !important;
-  z-index: 2 !important;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
-}
-
-.original-upload-wrapper button:hover:not(:disabled),
-.original-upload-wrapper input[type="button"]:hover:not(:disabled),
-.original-upload-wrapper [role="button"]:hover:not(:disabled) {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
-  background: linear-gradient(135deg, #5a58d8, #6b46c1) !important;
-}
-
-.original-upload-wrapper button:disabled,
-.original-upload-wrapper input[type="button"]:disabled {
-  opacity: 0.6 !important;
-  cursor: not-allowed !important;
-  transform: none !important;
-}
-
-/* Loading States */
-.original-upload-wrapper [class*="loading"],
-.original-upload-wrapper [class*="spinner"] {
+/* Ensure uploading state gets full visibility */
+.original-upload-wrapper [class*="uploading"] {
   background: rgba(102, 126, 234, 0.1) !important;
-  border-radius: 12px !important;
-  padding: 1rem !important;
+  border: 2px solid #667eea !important;
+  border-radius: 16px !important;
+  padding: 2rem !important;
   margin: 1rem 0 !important;
-  border: 1px solid rgba(102, 126, 234, 0.2) !important;
+  text-align: center !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Style the uploading text and progress */
+.original-upload-wrapper [class*="uploading"] p,
+.original-upload-wrapper [class*="progress"] p {
+  color: #667eea !important;
+  font-weight: 600 !important;
+  margin: 0.5rem 0 !important;
+}
+
+/* Progress bar styling if it exists */
+.original-upload-wrapper [class*="progress-bar"],
+.original-upload-wrapper [class*="progress"] > div {
+  background: #e2e8f0 !important;
+  border-radius: 50px !important;
+  height: 8px !important;
+  overflow: hidden !important;
+  margin: 1rem 0 !important;
+}
+
+.original-upload-wrapper [class*="progress-bar"] > div,
+.original-upload-wrapper [class*="progress"] > div > div {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  height: 100% !important;
+  border-radius: 50px !important;
+  transition: width 0.3s ease !important;
+}
+
+/* Additional specific selectors for common upload component patterns */
+.original-upload-wrapper > div[style*="border"]:empty {
+  display: none !important;
+}
+
+.original-upload-wrapper > div:has(input[type="file"]) ~ div:empty {
+  display: none !important;
+}
+
+/* Ensure the upload area container doesn't show multiple boxes */
+.upload-area + .upload-area:empty,
+div[style*="border"] + div[style*="border"]:empty {
+  display: none !important;
 }
 
 /* Enhanced Files Display Styles - Wrapper for Original Component */
