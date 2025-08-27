@@ -1,4 +1,4 @@
-import React, { useState  } from "react";
+import React, { useState } from "react";
 import { useWeb3Context } from "../contexts/useWeb3Context";
 import UploadImage from "../components/UploadImage";
 import GetImage from "../components/GetImage";
@@ -12,9 +12,9 @@ const StyledUploadWrapper = ({ children }) => {
   return (
     <div className="enhanced-upload-container">
       <div className="modern-upload-section">
-        <h3 className="upload-title">Upload Your Files</h3>
+        <h3 className="upload-title">Upload Your Images</h3>
         <p className="upload-subtitle">
-          Drag and drop or browse to upload your files securely to the
+          Drag and drop or browse to upload your Images securely to the
           blockchain with end-to-end encryption
         </p>
 
@@ -31,7 +31,7 @@ const StyledUploadWrapper = ({ children }) => {
           </div>
           <div className="badge">
             <div className="badge-icon"></div>
-            Zero Knowledge
+            Decentralized Storage
           </div>
         </div>
       </div>
@@ -39,6 +39,10 @@ const StyledUploadWrapper = ({ children }) => {
   );
 };
 
+const handleDisconnect = () => {
+  localStorage.removeItem("token"); // delete token
+  window.location.reload(); // optional: reload to update UI
+};
 // Wrapper component for better styling of original GetImage
 const StyledFilesWrapper = ({ children, selectedAccount }) => {
   return (
@@ -81,7 +85,7 @@ const Home = () => {
         <div className="header-content">
           <div className="logo-section">
             <div className="logo-icon">
-              <img src={myImage01} alt="My Photo" width="86" />
+              <img src={myImage01} alt="Logo" width="86" />
             </div>
             <h1 className="logo-text">CryptoVault</h1>
           </div>
@@ -109,10 +113,30 @@ const Home = () => {
                 <span>{isConnected ? "Connected" : "Disconnected"}</span>
               </div>
             )}
-            <div className="user-avatar">
-              <Link to="/wallet">
-                <img src={myImage02} alt="Profile Photo" width="50" />
-              </Link>
+            <div className="relative group">
+              {/* Profile Avatar */}
+              <div className="profile-dropdown">
+                <img
+                  src={myImage02}
+                  alt="Profile Photo"
+                  width="50"
+                  className="profile-avatar"
+                />
+
+                {/* Dropdown Menu */}
+                <div className="dropdown-menu">
+                  <ul>
+                    <li>
+                      <Link to="/wallet">
+                        <button>Connect Wallet</button>
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={handleDisconnect}>Disconnect Wallet</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -127,12 +151,12 @@ const Home = () => {
           {/* </div> */}
 
           <h2 className="hero-title">
-            Secure File Storage
+            Secure Image Storage
             <span className="hero-title-gradient">on Blockchain</span>
           </h2>
 
           <p className="hero-description">
-            Upload, manage, and retrieve your files securely with blockchain
+            Upload, manage, and retrieve your Images securely with blockchain
             technology. Simple, safe, and completely decentralized storage
             solution.
           </p>

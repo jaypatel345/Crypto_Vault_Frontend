@@ -10,7 +10,7 @@ const UploadImage = ({ reloadEffect }) => {
   const { web3State } = useWeb3Context();
   const { selectedAccount, contractInstance } = web3State;
 
-  // ✅ Base URL from .env
+  //  Base URL from .env
   const API = import.meta.env.VITE_API_URL;
 
   const uploadImageHash = async (ipfsHash) => {
@@ -37,7 +37,7 @@ const UploadImage = ({ reloadEffect }) => {
 
       const token = localStorage.getItem("token");
       if (!token) {
-        toast.error("You must be authenticated to upload.");
+        toast.error("Please connect your wallet before uploading an image.");
         return;
       }
 
@@ -45,7 +45,7 @@ const UploadImage = ({ reloadEffect }) => {
       const formData = new FormData();
       formData.append("file", file);
 
-      // ✅ Use deployed backend API
+      //  Use deployed backend API
       const url = `${API}/uploadImage`;
 
       const config = {

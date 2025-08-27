@@ -48,7 +48,7 @@ const GetImage = ({ reload }) => {
         setImages(imagesData);
       } catch (error) {
         console.error("Error fetching images:", error);
-        toast.error("Error fetching images");
+        // toast.error("Error fetching images");
         setImages([]);
       } finally {
         setLoading(false);
