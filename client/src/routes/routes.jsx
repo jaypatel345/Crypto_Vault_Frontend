@@ -6,14 +6,18 @@ import React from 'react';
 
 export const routes = createBrowserRouter([
   {
-    path: '/',
+    path: '/',           //  Home is now the default route
+    element: <Home />,
+  },
+  {
+    path: '/wallet',     //  Separate page for wallet connection
     element: <Wallet />,
   },
   {
-    element: <PrivateRoute />,
+    element: <PrivateRoute />,  //  if you still want protected routes
     children: [
       {
-        path: '/home',
+        path: '/home',   // optional: keep /home as protected if needed
         element: <Home />,
       },
     ],

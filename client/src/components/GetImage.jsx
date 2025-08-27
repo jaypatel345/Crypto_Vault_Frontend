@@ -14,6 +14,9 @@ const GetImage = ({ reload }) => {
   const { web3State } = useWeb3Context();
   const { selectedAccount, contractInstance } = web3State;
 
+  // ✅ Base URL from .env
+  const API = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const getImages = async () => {
       if (!selectedAccount || !contractInstance) {
@@ -24,13 +27,14 @@ const GetImage = ({ reload }) => {
       try {
         setLoading(true);
 
+        // Get IPFS hashes from contract
         const ipfsHashes = await contractInstance.viewFiles(selectedAccount);
         const ipfsHashArray = Array.isArray(ipfsHashes)
           ? ipfsHashes
           : Object.values(ipfsHashes);
 
         const token = localStorage.getItem("token");
-        const url = `http://localhost:3000/api/getImage?page=${currentPage}&limit=${imagePerPage}`;
+        const url = `${API}/getImage?page=${currentPage}&limit=${imagePerPage}`;
 
         const config = {
           headers: {
@@ -38,6 +42,7 @@ const GetImage = ({ reload }) => {
           },
         };
 
+        // Call backend with ipfsHashArray
         const res = await axios.post(url, { ipfsHashArray }, config);
         const imagesData = res.data.decryptedImageArr || [];
         setImages(imagesData);

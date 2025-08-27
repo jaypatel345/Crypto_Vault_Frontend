@@ -10,6 +10,9 @@ const UploadImage = ({ reloadEffect }) => {
   const { web3State } = useWeb3Context();
   const { selectedAccount, contractInstance } = web3State;
 
+  // ✅ Base URL from .env
+  const API = import.meta.env.VITE_API_URL;
+
   const uploadImageHash = async (ipfsHash) => {
     try {
       if (!contractInstance || !selectedAccount) {
@@ -41,7 +44,9 @@ const UploadImage = ({ reloadEffect }) => {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", file);
-      const url = `http://localhost:3000/api/uploadImage`;
+
+      // ✅ Use deployed backend API
+      const url = `${API}/uploadImage`;
 
       const config = {
         headers: {

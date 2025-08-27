@@ -15,11 +15,11 @@ const Wallet = () => {
   const navigate = useNavigate();
 
   const handleWalletConnection = async () => {
-    setError(""); // ✅ Always clear error first
+    setError(""); 
     try {
       const { contractInstance, selectedAccount, signer } = await connectWallet();
 
-      // ✅ Only sign here once
+      
       const signature = await signer.signMessage(SIGN_MESSAGE);
 
       const res = await axios.post(
@@ -30,7 +30,7 @@ const Wallet = () => {
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
         updateWeb3State({ contractInstance, selectedAccount });
-        navigate('/home'); // ✅ Redirect after success
+        navigate('/home'); // Redirect after success
       } else {
         setError("Authentication failed.");
       }
