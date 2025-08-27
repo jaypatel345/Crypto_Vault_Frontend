@@ -64,9 +64,10 @@ const Wallet = () => {
           <img src={myImage01} alt="Logo" width="150" />
         </div>
         <h1 className="wallet-title" style={{
-          fontSize: '1.8rem',
-          fontWeight: '700',
-          marginBottom: '30px'
+          fontSize: '2.4rem',
+          fontWeight: '600',
+          marginBottom: '30px',
+          marginTop: '-8px'
         }}>Crypted Vault</h1>
         <button
           className="connect-btn"
