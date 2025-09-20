@@ -5,7 +5,7 @@ import { connectWallet } from "../utils/connectWallet";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import '../css/Wallet.css';
-import myImage01 from "../assets/Group 1.png";
+import myImage01 from "../assets/symbol-xym-logo.svg";
 
 const SIGN_MESSAGE = "Welcome to Crypto Vault Website";
 const API_URL = "http://localhost:3000/api";
@@ -52,7 +52,7 @@ const Wallet = () => {
         backgroundColor: 'white',
         padding: '40px 30px',
         borderRadius: '20px',
-        boxShadow: '0 10px 25px rgba(0,0,0,0.4)',
+        boxShadow: '0 3px 5px rgba(0,0,0,0.4)',
         textAlign: 'center',
         maxWidth: '400px',
         width: '100%',
@@ -61,21 +61,21 @@ const Wallet = () => {
         <div className="wallet-icon" style={{
           
         }}>
-          <img src={myImage01} alt="Logo" width="150" />
+          <img src={myImage01} alt="Logo" width="60"  height="56" />
         </div>
         <h1 className="wallet-title" style={{
           fontSize: '2.4rem',
-          fontWeight: '600',
+          fontWeight: '650',
           marginBottom: '30px',
-          marginTop: '-8px'
+          marginTop: '18px',
         }}>Crypted Vault</h1>
         <button
           className="connect-btn"
           onClick={handleWalletConnection}
           style={{
-            background: 'linear-gradient(90deg, #38bdf8, #7c3aed)',
+            background: 'black',
             color: '#fff',
-            fontWeight: '600',
+            fontWeight: '550',
             padding: '15px 15px',
             borderRadius: '14px',
             border: 'none',

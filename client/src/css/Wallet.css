@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 4px; /* ✅ same as .top-border height */
+  padding: 4px 20px 20px 20px; /* ✅ Added padding for mobile */
 }
 
 .wallet-box {
@@ -29,6 +29,7 @@
   align-items: center;
   min-width: 340px;
   max-width: 400px;
+  width: 100%;
 }
 
 .wallet-title {
@@ -77,4 +78,161 @@
   border-radius: 8px;
   padding: 8px 16px;
   width: 100%;
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  .main-layout {
+    padding: 4px 16px 16px 16px;
+    min-height: 100vh;
+  }
+
+  .wallet-box {
+    min-width: 280px;
+    max-width: 90%;
+    padding: 32px 24px 24px 24px;
+    margin: 0 auto;
+  }
+
+  .wallet-title {
+    font-size: 3.2rem;
+    margin-bottom: 28px;
+    line-height: 1.1;
+  }
+
+  .connect-btn {
+    width: 160px;
+    padding: 12px 0;
+    font-size: 0.95rem;
+  }
+
+  .wallet-error {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-layout {
+    padding: 4px 12px 12px 12px;
+  }
+
+  .wallet-box {
+    min-width: 260px;
+    max-width: 95%;
+    padding: 28px 20px 20px 20px;
+    border-radius: 16px;
+  }
+
+  .wallet-title {
+    font-size: 2.8rem;
+    margin-bottom: 24px;
+  }
+
+  .connect-btn {
+    width: 150px;
+    padding: 11px 0;
+    font-size: 0.9rem;
+    border-radius: 25px;
+  }
+
+  .connect-btn:hover,
+  .connect-btn:focus {
+    transform: scale(1.05) translateY(-1px);
+  }
+
+  .wallet-error {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .main-layout {
+    padding: 4px 10px 10px 10px;
+  }
+
+  .wallet-box {
+    min-width: 240px;
+    max-width: 98%;
+    padding: 24px 16px 16px 16px;
+  }
+
+  .wallet-title {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+
+  .connect-btn {
+    width: 140px;
+    padding: 10px 0;
+    font-size: 0.85rem;
+  }
+
+  .wallet-error {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  .wallet-box {
+    min-width: 220px;
+    max-width: 100%;
+    padding: 20px 14px 14px 14px;
+  }
+
+  .wallet-title {
+    font-size: 2.2rem;
+    margin-bottom: 18px;
+  }
+
+  .connect-btn {
+    width: 130px;
+    padding: 9px 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .main-layout {
+    padding: 4px 20px 10px 20px;
+  }
+
+  .wallet-box {
+    padding: 20px 24px 16px 24px;
+  }
+
+  .wallet-title {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+
+  .connect-btn {
+    padding: 8px 0;
+  }
+
+  .wallet-error {
+    margin-top: 10px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .wallet-box {
+    box-shadow: 0 8px 48px rgba(56, 189, 248, 0.13);
+  }
+
+  .connect-btn {
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.18);
+  }
+
+  .connect-btn:hover,
+  .connect-btn:focus {
+    box-shadow: 0 16px 48px rgba(56, 189, 248, 0.25), 0 4px 16px rgba(124, 58, 237, 0.09);
+  }
 }

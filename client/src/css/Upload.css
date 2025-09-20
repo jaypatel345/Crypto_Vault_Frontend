@@ -719,121 +719,6 @@ div[style*="border"] + div[style*="border"]:empty {
   }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .navigation {
-    display: none;
-  }
-
-  .hero-title {
-    font-size: 36px;
-  }
-
-  .hero-description {
-    font-size: 18px;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    max-width: 300px;
-    justify-content: center;
-  }
-
-  .section-title {
-    font-size: 28px;
-  }
-
-  .section-description {
-    font-size: 16px;
-  }
-
-  .content-card {
-    padding: 24px;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .modern-upload-section {
-    padding: 2rem 1.5rem;
-  }
-
-  .modern-upload-section .upload-title {
-    font-size: 2rem;
-  }
-
-  .original-upload-wrapper .upload-area,
-  .original-upload-wrapper [class*="upload"] [class*="area"],
-  .original-upload-wrapper>div>div[style*="border"] {
-    padding: 2rem 1rem !important;
-  }
-
-  .security-badges {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .badge {
-    width: 100%;
-    max-width: 250px;
-    justify-content: center;
-  }
-
-  .profile-dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .profile-avatar {
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-
-
-
-
-}
-
-@media (max-width: 480px) {
-  .hero-section {
-    padding: 40px 16px 80px;
-  }
-
-  .upload-section,
-  .files-section {
-    padding: 40px 16px;
-  }
-
-  .header-content {
-    padding: 0 16px;
-  }
-
-  .modern-upload-section {
-    padding: 1.5rem 1rem;
-  }
-
-  .modern-upload-section .upload-title {
-    font-size: 1.75rem;
-  }
-
-  .original-upload-wrapper [class*="icon"],
-  .original-upload-wrapper>div>div[style*="flex"]>div:first-child {
-    width: 60px !important;
-    height: 60px !important;
-    font-size: 1.5rem !important;
-  }
-
-}
-
 /* Dropdown menu hidden by default */
 .dropdown-menu {
   position: absolute;
@@ -880,4 +765,441 @@ div[style*="border"] + div[style*="border"]:empty {
 
 .dropdown-menu li button:hover {
   background-color: #d84e4e;
+}
+
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-avatar {
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: 0 20px;
+  }
+  
+  .hero-section {
+    padding: 60px 20px 100px;
+  }
+  
+  .upload-section,
+  .files-section {
+    padding: 60px 20px;
+  }
+  
+  .section-container {
+    max-width: 95%;
+  }
+  
+  .content-card {
+    padding: 28px;
+  }
+  
+  .modern-upload-section {
+    padding: 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    display: none;
+  }
+  
+  .header-content {
+    padding: 0 16px;
+    height: 56px;
+  }
+  
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .logo-text {
+    font-size: 18px;
+  }
+  
+  .connection-status {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .hero-section {
+    padding: 40px 16px 80px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero-description {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 60px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+  
+  .feature-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  
+  .feature-card {
+    padding: 24px 20px;
+  }
+  
+  .upload-section,
+  .files-section {
+    padding: 40px 16px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .section-description {
+    font-size: 16px;
+  }
+
+  .content-card {
+    padding: 20px;
+  }
+
+  .modern-upload-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .modern-upload-section .upload-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .modern-upload-section .upload-subtitle {
+    font-size: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .original-upload-wrapper .upload-area,
+  .original-upload-wrapper [class*="upload"] [class*="area"],
+  .original-upload-wrapper>div>div[style*="border"] {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .security-badges {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 4rem;
+  }
+
+  .badge {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+  
+  .original-files-wrapper .image-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .account-info {
+    padding: 16px;
+  }
+  
+  .connected-account {
+    font-size: 14px;
+  }
+  
+  .dropdown-menu {
+    width: 140px;
+    right: -10px;
+  }
+  
+  .dropdown-menu li button {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .footer-brand {
+    font-size: 18px;
+  }
+  
+  .footer-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0 12px;
+    height: 52px;
+  }
+  
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .logo-text {
+    font-size: 16px;
+  }
+  
+  .header-actions {
+    gap: 8px;
+  }
+  
+  .connection-status {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+  
+  .status-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .hero-section {
+    padding: 32px 12px 60px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+  
+  .hero-title-gradient {
+    font-size: 26px;
+  }
+
+  .hero-description {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    max-width: 260px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  
+  .feature-card {
+    padding: 20px 16px;
+  }
+  
+  .feature-title {
+    font-size: 16px;
+  }
+  
+  .feature-description {
+    font-size: 14px;
+  }
+  
+  .upload-section,
+  .files-section {
+    padding: 32px 12px;
+  }
+  
+  .section-title {
+    font-size: 24px;
+  }
+  
+  .section-description {
+    font-size: 15px;
+  }
+  
+  .content-card {
+    padding: 16px;
+  }
+
+  .modern-upload-section {
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+  }
+
+  .modern-upload-section .upload-title {
+    font-size: 1.75rem;
+  }
+  
+  .modern-upload-section .upload-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
+  }
+
+  .original-upload-wrapper .upload-area,
+  .original-upload-wrapper [class*="upload"] [class*="area"],
+  .original-upload-wrapper>div>div[style*="border"] {
+    padding: 1rem 0.75rem !important;
+    min-height: 120px !important;
+  }
+
+  .original-upload-wrapper [class*="icon"],
+  .original-upload-wrapper>div>div[style*="flex"]>div:first-child {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.2rem !important;
+  }
+
+  .security-badges {
+    margin-top: 3rem;
+    gap: 0.5rem;
+  }
+
+  .badge {
+    max-width: 220px;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
+  }
+  
+  .badge-icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .original-files-wrapper .uploaded-image {
+    height: 180px;
+  }
+  
+  .account-info {
+    padding: 12px;
+  }
+  
+  .connected-account {
+    font-size: 13px;
+  }
+  
+  .dropdown-menu {
+    width: 120px;
+    right: -15px;
+  }
+  
+  .dropdown-menu li button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-content {
+    padding: 0 10px;
+    height: 50px;
+  }
+  
+  .logo-icon {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .logo-text {
+    font-size: 14px;
+  }
+  
+  .connection-status {
+    font-size: 10px;
+    padding: 2px 5px;
+  }
+  
+  .hero-section {
+    padding: 28px 10px 50px;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
+  
+  .hero-title-gradient {
+    font-size: 22px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    max-width: 240px;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .upload-section,
+  .files-section {
+    padding: 28px 10px;
+  }
+  
+  .section-title {
+    font-size: 22px;
+  }
+  
+  .section-description {
+    font-size: 14px;
+  }
+  
+  .content-card {
+    padding: 14px;
+  }
+
+  .modern-upload-section {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .modern-upload-section .upload-title {
+    font-size: 1.5rem;
+  }
+  
+  .modern-upload-section .upload-subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .original-upload-wrapper .upload-area {
+    padding: 0.75rem 0.5rem !important;
+    min-height: 100px !important;
+  }
+
+  .security-badges {
+    margin-top: 2.5rem;
+    gap: 0.4rem;
+  }
+
+  .badge {
+    max-width: 200px;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .badge-icon {
+    width: 12px;
+    height: 12px;
+  }
 }

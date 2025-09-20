@@ -3,7 +3,7 @@ import { useWeb3Context } from "../contexts/useWeb3Context";
 import UploadImage from "../components/UploadImage";
 import GetImage from "../components/GetImage";
 import "../css/Upload.css"; // Updated CSS file name
-import myImage01 from "../assets/Group 1.png";
+import myImage01 from "../assets/symbol-xym-logo.svg";
 import myImage02 from "../assets/360_F_964891898_SuTIP6H2AVZkBuUG2cIpP9nvdixORKpM.jpg";
 import { Link } from "react-router-dom";
 
@@ -84,8 +84,8 @@ const Home = () => {
       <header className="home-header">
         <div className="header-content">
           <div className="logo-section">
-            <div className="logo-icon">
-              <img src={myImage01} alt="Logo" width="86" />
+            <div>
+              <img src={myImage01} alt="Logo" width="30" />
             </div>
             <h1 className="logo-text">CryptoVault</h1>
           </div>
@@ -132,7 +132,9 @@ const Home = () => {
                       </Link>
                     </li>
                     <li>
-                      <button onClick={handleDisconnect}>Disconnect Wallet</button>
+                      <button onClick={handleDisconnect}>
+                        Disconnect Wallet
+                      </button>
                     </li>
                   </ul>
                 </div>
@@ -225,7 +227,9 @@ const Home = () => {
       <footer className="home-footer">
         <div className="footer-content">
           <div className="footer-logo">
-            <div className="logo-icon">🛡️</div>
+            <div className="">
+              <img src={myImage01} alt="Logo" width="30" />
+            </div>
             <span className="footer-brand">CryptoVault</span>
           </div>
 
