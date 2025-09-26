@@ -46,7 +46,7 @@ const UploadImage = ({ reloadEffect }) => {
       formData.append("file", file);
 
       //  Use deployed backend API
-      const url = `${API}/uploadImage`;
+      const url = `${API}/api/uploadImage`;
 
       const config = {
         headers: {

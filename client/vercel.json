@@ -9,6 +9,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "env": {
-    "VITE_API_URL": "https://your-backend.onrender.com/api"
-  }
+    "VITE_API_URL": "https://crypto-vault-backend-o3rd.onrender.com/api"
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

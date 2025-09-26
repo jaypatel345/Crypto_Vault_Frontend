@@ -34,11 +34,12 @@ const GetImage = ({ reload }) => {
           : Object.values(ipfsHashes);
 
         const token = localStorage.getItem("token");
-        const url = `${API}/getImage?page=${currentPage}&limit=${imagePerPage}`;
-
+        const url = `${API}/api/getImage?page=${currentPage}&limit=${imagePerPage}`;
+        console.log(token);
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         };
 
@@ -69,7 +70,9 @@ const GetImage = ({ reload }) => {
   };
 
   if (!selectedAccount || !contractInstance) {
-    return <p className="error-text">Please connect your wallet to view images.</p>;
+    return (
+      <p className="error-text">Please connect your wallet to view images.</p>
+    );
   }
 
   return (

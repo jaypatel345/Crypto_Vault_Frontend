@@ -6,9 +6,7 @@ const ConnectedAccount = () => {
 
   // Helper to shorten Ethereum address
   const formatAddress = (address) =>
-    address
-      ? `${address.slice(0, 6)}...${address.slice(-4)}`
-      : "";
+    address ? `${address.slice(0, 6)}...${address.slice(-4)}` : "";
 
   return (
     <div className="w-full flex flex-col justify-center items-center md:flex-row md:justify-between md:px-10">
